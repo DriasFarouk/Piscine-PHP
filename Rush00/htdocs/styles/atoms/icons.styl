@@ -1,0 +1,52 @@
+//
+// Icons
+// --------------------------------------------------------------------------
+
+
+// Variables
+// --------------------------------------------------------------------------
+
+$icon-font-path ?=          '../fonts/icons/'
+$icon-font-family ?=        'icons'
+$icon-font-name ?=          'icons'
+$icon-font-svg-id ?=        'icons'
+
+$icon-close ?=              '\e902'
+$icon-edit ?=               '\e906'
+$icon-facebook ?=           '\e909'
+$icon-help ?=               '\e90b'
+$icon-phone ?=              '\e912'
+$icon-position ?=           '\e913'
+$icon-quote ?=              '\e914'
+$icon-search ?=             '\e915'
+$icon-tel ?=                '\e917'
+$icon-twitter ?=            '\e91a'
+$icon-youtube ?=            '\e91c'
+
+
+// Mixin
+// --------------------------------------------------------------------------
+
+icon($icon)
+    content $icon
+    display inline-block
+    font-family $icon-font-family
+    font-style normal
+    font-weight normal
+    line-height 1
+    -webkit-font-smoothing antialiased
+    -moz-osx-font-smoothing grayscale
+
+
+// Load fonts
+// --------------------------------------------------------------------------
+
+@font-face
+    font-family $icon-font-family
+    src url($icon-font-path + $icon-font-name + '.eot')
+    src url($icon-font-path + $icon-font-name + '.eot?#iefix') format('embedded-opentype'),
+        url($icon-font-path + $icon-font-name + '.woff') format('woff'),
+        url($icon-font-path + $icon-font-name + '.ttf') format('truetype'),
+        url($icon-font-path + $icon-font-name + '.svg#' + $icon-font-svg-id) format('svg')
+    font-style normal
+    font-weight normal

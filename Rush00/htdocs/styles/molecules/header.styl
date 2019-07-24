@@ -1,0 +1,19 @@
+.header-logo
+    padding 10px 20px
+    font-family $font-family-raleway
+    font-size 1.9rem
+    color $color-gray
+    font-weight 600
+
+    @media (min-width $screen-sm-min)
+        text-align left
+        padding 50px 100px 0
+
+    a
+        color $color-gray
+
+        &:hover,
+        &:focus,
+        &:active
+            text-decoration none
+            color lighten($color-gray, 15%)

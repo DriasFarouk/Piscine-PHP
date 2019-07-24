@@ -1,0 +1,158 @@
+body{
+
+	background-color: #505050;
+	margin-left: 20%;
+	margin-right: 20%;
+}
+.wrapper{
+	padding-top: 10px;
+	width: 1420px;
+	margin: 0 auto;
+	position: relative;
+}
+header{
+	background-color: #909090;
+	height: 120px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+header img{
+	margin:0%;
+	height: 100%;
+}
+.shadow{
+   box-shadow: 8px 11px 8px 0 #000;
+}
+
+.radius{
+	border-radius: 10px;	
+}
+.rh{
+	float: right;
+	position: relative;
+	width: 286px;
+}
+
+.loupe{
+    height: auto;
+    margin-top: 17px;
+}
+.reload{
+    float: right;
+    height: auto;
+    margin-right: 10px;
+    width: 17px;
+}
+
+.close{
+    bottom: 30px;
+    height: auto;
+    margin-right: 10px;
+    position: absolute;
+    right: 0;
+    width: 17px;
+}
+.mid{
+	margin-top: 20px;
+	width: 100%;
+	padding-left: 30px;
+
+
+}
+.mid .side{
+	background-color: #909090;
+	float: left;
+
+}
+
+.side_left{
+	width: 105px;
+	padding-left: 35px;
+	height: 425px;
+	padding-bottom: 20px;
+	padding-top: 20px;
+}
+
+.side_left img{
+	width: 70px;
+	margin-bottom: 10px;
+}
+.side_mid{
+	margin-right: 30px;
+	width: 1140px;
+	margin-left: 30px;
+	padding-bottom: 10px;
+}
+
+.side_right{
+	width: 131px;
+	height: 425px;
+	padding-top: 20px;
+	padding-left: 10px;
+	text-align: center; 
+}
+.side_right img{
+	width: 70px;
+	margin-bottom: 10px;
+}
+.border_img{
+	border: 5px solid red;
+	border-radius: 10px;
+}
+
+.cluster{
+	width: 1120px;
+	margin-left: 10px;
+	margin-top: 10px;
+	margin-right: 10px;
+}
+.brick{
+	background: repeat url('resources/brick.jpg');
+	width: 120px;
+	height: 70px;
+}
+.gb{
+	float: left;
+	width: 510px;
+	height: 170px;
+	position: absolute;
+	top: 750px;
+	left: 500px;
+	padding-left: 10px;
+	background-color: #88FF89;
+	font-family: Times;
+}
+
+.gb p{
+   font-size: 21px;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+.sub{
+    border: medium none;
+    border-radius: 0;
+    font-size: 13px;
+    height: 19px;
+    letter-spacing: 1.6px;
+    padding-bottom: 20px;
+    padding-top: 1px;
+    width: 80px;
+	background: #f5f7f6;
+}
+
+.maj{
+	font-size: 37px;
+}
+
+.txtsha{
+text-shadow: 7px 7px 5px rgba(255, 77, 49, 1);
+}
+
+.ita{
+	    font-size: 20px !important;
+    	font-style: italic;
+}
+
+.txt{
+	width: 380px;
+}

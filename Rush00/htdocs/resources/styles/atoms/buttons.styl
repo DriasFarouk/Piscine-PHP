@@ -1,0 +1,244 @@
+//
+// Buttons
+// --------------------------------------------------------------------------
+
+
+// Variables
+// --------------------------------------------------------------------------
+
+$btn-font-size ?=            1.5rem
+$btn-font-weight ?=          500
+
+$btn-padding-vertical ?=     12px
+$btn-padding-horizontal ?=   35px
+
+$btn-default-color ?=        #fff
+$btn-default-bg ?=           $text-color
+
+$btn-primary-color ?=        #fff
+$btn-primary-bg ?=           $color-primary
+
+$btn-facebook-color ?=       #fff
+$btn-facebook-bg ?=          $color-facebook
+
+$btn-twitter-color ?=        #fff
+$btn-twitter-bg ?=           $color-twitter
+
+$btn-success-color ?=        #fff
+$btn-success-bg ?=           $color-success
+
+$btn-info-color ?=           #fff
+$btn-info-bg ?=              $color-info
+
+$btn-warning-color ?=        #fff
+$btn-warning-bg ?=           $color-warning
+
+$btn-error-color ?=          #fff
+$btn-error-bg ?=             $color-error
+
+$btn-ghost-color ?=          #fff
+$btn-ghost-bg ?=             #fff
+
+$btn-link-disabled-color ?=  $color-gray-light
+
+// Mixins
+// --------------------------------------------------------------------------
+
+button-variant($color, $background, $ghost = false)
+    color $color
+    background-color $background
+    transition background-color .40s ease-in-out
+
+    &:active,
+    &.active
+        background-image none
+
+    &:hover,
+    &:focus,
+    &:active,
+    &.active
+        color $color
+        background-color lighten($background, 12%)
+
+    &.disabled,
+    &[disabled],
+    fieldset[disabled] &
+        &,
+        &:hover,
+        &:focus,
+        &:active,
+        &.active
+            background-color $background
+
+    if $ghost
+        background-color alpha($background, .3)
+        border 2px solid $background
+
+        &:hover,
+        &:focus,
+        &:active,
+        &.active
+            background-color alpha($background, .5)
+
+button-size($padding-vertical, $padding-horizontal, $font-size, $line-height)
+    padding $padding-vertical $padding-horizontal $padding-vertical
+    font-size $font-size
+    line-height $line-height
+
+
+// Base styles
+// --------------------------------------------------------------------------
+
+.btn
+    display inline-block
+    margin-bottom 0 // For input.btn
+    font-weight $btn-font-weight
+    text-align center
+    text-transform uppercase
+    white-space nowrap
+    vertical-align middle
+    touch-action manipulation
+    cursor pointer
+    background-image none // Reset unusual Firefox-on-Android default style see https://github.com/necolas/normalize.css/issues/214
+    border none
+    button-size($btn-padding-vertical, $btn-padding-horizontal, $btn-font-size, $line-height-base)
+    user-select none
+
+    &,
+    &:active,
+    &.active
+        &:focus,
+        &.focus
+            tab-focus()
+
+    &:hover,
+    &:focus
+        color $btn-default-color
+        text-decoration none
+
+    &:active,
+    &.active
+        outline 0
+        background-image none
+
+    &.disabled,
+    &[disabled],
+    fieldset[disabled] &
+        cursor not-allowed
+        pointer-events none // Future-proof disabling of clicks
+        opacity-ie(.65)
+
+.btn--social
+    border-radius 5px
+    text-transform none
+    font-size 1.5rem
+    padding 6px 15px
+    margin-bottom 15px
+
+    @media (min-width $screen-md-min)
+        margin 0
+        font-size 1.8rem
+
+// Alternate buttons
+// --------------------------------------------------------------------------
+
+.btn--default
+    button-variant($btn-default-color, $btn-default-bg)
+
+.btn--primary
+    button-variant($btn-primary-color, $btn-primary-bg)
+
+.btn--facebook
+    button-variant($btn-facebook-color, $btn-facebook-bg)
+
+.btn--twitter
+    button-variant($btn-twitter-color, $btn-twitter-bg)
+
+// Success appears as green
+.btn--success
+    button-variant($btn-success-color, $btn-success-bg)
+
+// Info appears as blue-green
+.btn--info
+    button-variant($btn-info-color, $btn-info-bg)
+
+// Warning appears as orange
+.btn--warning
+    button-variant($btn-warning-color, $btn-warning-bg)
+
+// Danger and error appear as red
+.btn--error
+    button-variant($btn-error-color, $btn-error-bg)
+
+.btn--ghost
+    button-variant($btn-ghost-color, $btn-ghost-bg, true)
+
+
+// Link buttons
+//
+// Make a button look and behave like a link
+// --------------------------------------------------------------------------
+
+.btn--link
+    font-weight normal
+    color $link-color
+
+    &,
+    &:active,
+    &.active,
+    &[disabled],
+    fieldset[disabled] &
+        background-color transparent
+
+    &,
+    &:hover,
+    &:focus,
+    &:active
+        border-color transparent
+
+    &:hover,
+    &:focus
+        color $link-hover-color
+        text-decoration $link-hover-decoration
+        background-color transparent
+
+    &[disabled],
+    fieldset[disabled] &
+        &:hover,
+        &:focus
+            color $btn-link-disabled-color
+            text-decoration none
+
+
+// Button Sizes
+// --------------------------------------------------------------------------
+
+.btn--lg
+    // line-height ensure even-numbered height of button next to large input
+    button-size($padding-large-vertical, ($btn-padding-horizontal + 10px), $font-size-large, $line-height-base)
+
+.btn--sm
+    // line-height ensure proper height of button next to small input
+    button-size($padding-small-vertical, ($padding-small-horizontal + 10px), $font-size-small, $line-height-base)
+
+.btn--xs
+    button-size($padding-xs-vertical, $padding-xs-horizontal, $font-size-small, $line-height-base)
+
+
+// Block button
+// --------------------------------------------------------------------------
+
+.btn--block
+    display block
+    width 100%
+
+// Vertically space out multiple block buttons
+.btn--block + .btn--block
+    margin-top 5px
+
+// Specificity overrides
+input[type="submit"],
+input[type="reset"],
+input[type="button"]
+    &.btn--block
+        width 100%

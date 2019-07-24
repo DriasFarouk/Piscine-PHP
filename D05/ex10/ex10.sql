@@ -1,0 +1,1 @@
+select title as 'Title', summary as 'Summary', prod_year from film f INNER JOIN genre g ON f.id_genre = g.id_genre ORDER BY prod_year DESC;

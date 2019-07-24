@@ -1,0 +1,55 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Ballon</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<style>
+     #balloon {
+				margin: auto;
+				width: 200px;
+				height: 200px;
+				background-color: red;
+				border-radius: 100%;
+			}
+	</style>
+</head>
+<body>
+	<div id="balloon"></div>
+	<script>
+		var colors = [ 'red', 'green', 'blue' ]
+		var ballon = document.getElementById('balloon');
+
+		function getNextColor(color) {
+			var index = colors.indexOf(color)
+			return colors[(index+1)%colors.length]
+		}
+
+		function getPrevColor(color) {
+			var index = colors.indexOf(color)
+			return index-1 < 0 ? colors[colors.length-1] : colors[index-1]
+		}
+
+		ballon.addEventListener('click', function() {
+			var size = ballon.clientHeight + 10
+			if (size > 420) {
+				size = 200;
+			}
+			ballon.style['background-color'] = getNextColor(ballon.style['background-color'] || "red")
+			ballon.style['height'] = size + 'px'
+			ballon.style['width'] = size + 'px'
+		});
+
+
+		ballon.addEventListener('mouseleave', function() {
+			var size = ballon.clientHeight - 5
+			if (size < 200) {
+				return ;
+			}
+			ballon.style['background-color'] = getPrevColor(ballon.style['background-color'] || "red")
+			ballon.style['height'] = size + 'px'
+			ballon.style['width'] = size + 'px'
+		});
+	</script>
+</body>
+</html>

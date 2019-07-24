@@ -1,0 +1,355 @@
+//
+// Grid system
+// --------------------------------------------------------------------------
+
+
+// Variables
+// --------------------------------------------------------------------------
+
+$wrapper ?=  920px
+$gutter ?=   30px
+$rtl ?=      false
+$flexbox ?=  false
+
+// Functions
+// --------------------------------------------------------------------------
+
+get-size($fraction = '1/1', $gut = $gutter)
+    if $gut is 0
+        return s('calc(99.999999% * %s)', unquote($fraction))
+    else
+        return s('calc(99.99% * %s - (%s - %s * %s))', unquote($fraction), $gut, $gut, unquote($fraction))
+
+
+// Debug
+// --------------------------------------------------------------------------
+
+debug($bg = blue)
+    *
+        background rgba($bg, 10%)
+
+
+// Flexbox container
+// --------------------------------------------------------------------------
+
+flex-container($direction = row)
+    display flex
+    if $direction is row
+        flex-flow row wrap
+    if $direction is column
+        flex-flow column nowrap
+
+
+// Horizontally center a container element and apply padding to it
+// --------------------------------------------------------------------------
+
+center($max-size = $wrapper, $pad = ($gutter / 2), $flex = $flexbox)
+    if $flex is false
+        clearfix()
+    else
+        flex-container()
+    if $pad is not 0
+        padding-left $pad
+        padding-right $pad
+    max-width $max-size
+    margin-left auto
+    margin-right auto
+    @media (min-width $screen-md-min)
+        max-width ($max-size + 220px)
+    @media (min-width $screen-lg-min)
+        max-width ($max-size + 250px)
+
+
+// Align nested elements
+// --------------------------------------------------------------------------
+
+align($location = middle-center, $flex = $flexbox)
+    if $flex is false
+        position relative
+        > *
+            if $location is reset
+                position static
+            else
+                position absolute
+            if $location is reset
+                top auto
+                right auto
+                bottom auto
+                left auto
+                transform translate3d(0, 0, 0)
+            else if $location is top-left
+                top 0
+                right auto
+                bottom auto
+                left 0
+                transform translate3d(0, 0, 0)
+            else if $location is top-center or $location is top
+                top 0
+                right auto
+                bottom auto
+                left 50%
+                transform translate3d(-50%, 0, 0)
+            else if $location is top-right
+                top 0
+                right 0
+                bottom auto
+                left auto
+                transform translate3d(0, 0, 0)
+            else if $location is middle-left or $location is left
+                top 50%
+                right auto
+                bottom auto
+                left 0
+                transform translate3d(0, -50%, 0)
+            else if $location is middle-right or $location is right
+                top 50%
+                right 0
+                bottom auto
+                left auto
+                transform translate3d(0, -50%, 0)
+            else if $location is bottom-left
+                top auto
+                right auto
+                bottom 0
+                left 0
+                transform translate3d(0, 0, 0)
+            else if $location is bottom-center or $location is bottom
+                top auto
+                right auto
+                bottom 0
+                left 50%
+                transform translate3d(-50%, 0, 0)
+            else if $location is bottom-right
+                top auto
+                right 0
+                bottom 0
+                left auto
+                transform translate3d(0, 0, 0)
+            else
+                top 50%
+                right auto
+                bottom auto
+                left 50%
+                transform translate3d(-50%, -50%, 0)
+    else
+        display flex
+        if $location is reset
+            justify-content inherit
+            align-items inherit
+        else if $location is top-left
+            justify-content flex-start
+            align-items flex-start
+        else if $location is top-center or $location is top
+            justify-content center
+            align-items flex-start
+        else if $location is top-right
+            justify-content flex-end
+            align-items flex-start
+        else if $location is middle-left or $location is left
+            justify-content flex-start
+            align-items center
+        else if $location is middle-right or $location is right
+            justify-content flex-end
+            align-items center
+        else if $location is bottom-left
+            justify-content flex-start
+            align-items flex-end
+        else if $location is bottom-center or $location is bottom
+            justify-content center
+            align-items flex-end
+        else if $location is bottom-right
+            justify-content flex-end
+            align-items flex-end
+        else
+            justify-content center
+            align-items center
+
+
+// Column
+// --------------------------------------------------------------------------
+
+column($fraction = '1/1', $gut = $gutter, $flex = $flexbox, $cycle = convert(unquote(split('/', $fraction)[1])))
+    _get-size()
+        if $gut is 0
+            return s('calc(99.999999% * %s)', unquote($fraction))
+        else
+            return s('calc(99.99% * %s - (%s - %s * %s))', unquote($fraction), $gut, $gut, unquote($fraction))
+    width _get-size()
+    if $flex is false
+        if $rtl
+            &:nth-child(n)
+                margin-left $gut
+                float right
+                clear none
+            &:last-child
+                margin-left 0
+            &:nth-child({$cycle}n)
+                margin-left 0
+                float left
+            &:nth-child({$cycle}n + 1)
+                clear right
+        else
+            &:nth-child(n)
+                margin-right $gut
+                float left
+                clear none
+            &:last-child
+                margin-right 0
+            &:nth-child({$cycle}n)
+                margin-right 0
+                float right
+            &:nth-child({$cycle}n + 1)
+                clear left
+    else
+        flex 0 0 auto
+        if $rtl
+            &:nth-child(n)
+                margin-left $gut
+            &:last-child
+                margin-left 0
+            &:nth-child({$cycle}n)
+                margin-left 0
+        else
+            &:nth-child(n)
+                margin-right $gut
+            &:last-child
+                margin-right 0
+            &:nth-child({$cycle}n)
+                margin-right 0
+
+
+// Row
+// --------------------------------------------------------------------------
+
+row($fraction = '1/1', $gut = $gutter, $flex = $flexbox)
+    _get-size()
+        if $gut is 0
+            return s('calc(99.999999% * %s)', unquote($fraction))
+        else
+            return s('calc(99.99% * %s - (%s - %s * %s))', unquote($fraction), $gut, $gut, unquote($fraction))
+    width: 100%
+    height: _get-size()
+    margin-bottom $gut
+    if $flex is true
+        flex 0 0 auto
+    &:last-child
+        margin-bottom 0
+
+
+// Column with a gutter on the right and bottom
+// --------------------------------------------------------------------------
+
+waffle($fraction = '1/1', $cycle = convert(unquote(split('/', $fraction)[1])), $gut = $gutter, $flex = $flexbox)
+    _get-size()
+        if $gut is 0
+            return s('calc(99.999999% * %s)', unquote($fraction))
+        else
+            return s('calc(99.99% * %s - (%s - %s * %s))', unquote($fraction), $gut, $gut, unquote($fraction))
+    width _get-size()
+    height _get-size()
+    if $flex is false
+        if $rtl
+            &:nth-child(n)
+                float right
+                margin-left $gut
+                clear none
+            &:nth-child({$cycle}n), &:last-child
+                margin-left 0
+            &:nth-child({$cycle}n + 1)
+                clear right
+        else
+            &:nth-child(n)
+                float left
+                margin-right $gut
+                clear none
+            &:nth-child({$cycle}n), &:last-child
+                margin-right 0
+            &:nth-child({$cycle}n + 1)
+                clear left
+    else
+        flex: 0 0 auto
+        if $rtl
+            &:nth-child(n)
+                margin-left $gut
+            &:nth-child({$cycle}n), &:last-child
+                margin-left 0
+        else
+            &:nth-child(n)
+                margin-right $gut
+            &:nth-child({$cycle}n), &:last-child
+                margin-right 0
+    &:nth-child(n)
+        margin-bottom $gut
+    &:last-child
+        margin-bottom 0
+    &:nth-last-child(-n + {$cycle})
+        margin-bottom 0
+
+
+// Offset
+// --------------------------------------------------------------------------
+
+offset($fraction = '1/1', $gut = $gutter, $dir = row)
+    $numerator = convert(unquote(split('/', $fraction)[0]))
+    _get-size()
+        if $dir is row
+            if $numerator > 0
+                if $gut is 0
+                    return s('calc(99.999999% * %s)', unquote($fraction))
+                else
+                    return s('calc(99.99% * %s - (%s - %s * %s) + (%s * 2))', unquote($fraction), $gut, $gut, unquote($fraction), $gut)
+            if $numerator < 0
+                if $gut is 0
+                    return s('calc(99.999999% * (%s * -1))', unquote($fraction))
+                else
+                    return s('calc(99.99% * (%s * -1) - (%s - %s * (%s * -1)) + %s)', unquote($fraction), $gut, $gut, unquote($fraction), $gut)
+        else
+            if $numerator > 0
+                if $gut is 0
+                    return s('calc(99.999999% * %s)', unquote($fraction))
+                else
+                    return s('calc(99.99% * %s - (%s - %s * %s) + (%s * 2))', unquote($fraction), $gut, $gut, unquote($fraction), $gut)
+            if $numerator < 0
+                if $gut is 0
+                    return s('calc(99.999999% * (%s * -1))', unquote($fraction))
+                else
+                    return s('calc(99.99% * (%s * -1) - (%s - %s * (%s * -1)) + (%s * 2))', unquote($fraction), $gut, $gut, unquote($fraction), $gut)
+    if $dir is row
+        if $numerator > 0
+            margin-right _get-size() !important
+        else if $numerator < 0
+            margin-left _get-size() !important
+        else
+            margin-left 0 !important
+            margin-right $gut !important
+    else
+        if $numerator > 0
+            margin-bottom _get-size() !important
+        else if $numerator < 0
+            margin-top _get-size() !important
+        else
+            margin-top 0 !important
+            margin-bottom $gut !important
+
+
+// Move
+// --------------------------------------------------------------------------
+
+move($fraction = '1/1', $dir = row, $gut = $gutter)
+    _get-size()
+        if $gut is 0
+            return s('calc(99.999999% * %s)', unquote($fraction))
+        else
+            return s('calc(99.99% * %s - (%s - %s * %s) + %s)', unquote($fraction), $gut, $gut, unquote($fraction), $gut)
+    position relative
+    if $dir is row
+        left _get-size()
+    else
+        top _get-size()
+
+
+// Utilities
+// --------------------------------------------------------------------------
+
+.container
+    center(,0)

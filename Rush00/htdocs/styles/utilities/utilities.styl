@@ -1,0 +1,206 @@
+//
+// Utility classes
+// --------------------------------------------------------------------------
+
+
+// Mixins
+// --------------------------------------------------------------------------
+
+// http://nicolasgallagher.com/micro-clearfix-hack/
+clearfix()
+    &::before,
+    &::after
+        content ''
+        display table
+    &::after
+        clear both
+
+// https://github.com/h5bp/html5-boilerplate/commit/aa0396eae757
+text-hide()
+    font unquote('0/0') a
+    color transparent
+    text-shadow none
+    background-color transparent
+    border 0
+
+// http://snook.ca/archives/html_and_css/hiding-content-for-accessibility
+sr-only()
+    position absolute
+    width 1px
+    height 1px
+    margin -1px
+    padding 0
+    overflow hidden
+    clip rect(0, 0, 0, 0)
+    border 0
+
+// WebKit-style focus
+tab-focus()
+    // Default
+    outline thin dotted
+    // WebKit
+    outline 5px auto -webkit-focus-ring-color
+    outline-offset -2px
+
+// Opacity with filter for IE8
+opacity-ie($opacity)
+    opacity $opacity
+    // IE8 filter
+    $opacity-ie = ($opacity * 100)
+    filter s('alpha(opacity=%s)', $opacity-ie)
+
+// Center vertically and horizontally something
+middle()
+    position absolute
+    top 50%
+    left 50%
+    transform translate(-50%, -50%)
+
+// Border radius
+border-top-radius($radius)
+    border-top-right-radius $radius
+    border-top-left-radius $radius
+
+border-right-radius($radius)
+    border-bottom-right-radius $radius
+    border-top-right-radius $radius
+
+border-bottom-radius($radius)
+    border-bottom-right-radius $radius
+    border-bottom-left-radius $radius
+
+border-left-radius($radius)
+    border-bottom-left-radius $radius
+    border-top-left-radius $radius
+
+// Placeholder vendor prefixes
+placeholder($color = $input-color-placeholder)
+    &::-moz-placeholder // Firefox
+        color $color
+        opacity 1 // Override Firefox's unusual default opacity; See https//github.com/twbs/bootstrap/pull/11526
+    &:-ms-input-placeholder // Internet Explorer 10+
+        color $color
+    &::-webkit-input-placeholder // Safari and Chrome
+        color $color
+
+
+// Floats
+// --------------------------------------------------------------------------
+
+.clearfix
+    clearfix()
+
+
+// Alignment
+// --------------------------------------------------------------------------
+
+.text-left
+    text-align left
+
+.text-right
+    text-align right
+
+.text-center
+    text-align center
+
+
+// Toggling content
+// --------------------------------------------------------------------------
+
+.hide
+    display none !important
+
+.show
+    display block !important
+
+.invisible
+    visibility hidden
+
+.text-hide
+    text-hide()
+
+// Hide from screenreaders and browsers
+.hidden
+    display none !important
+    visibility hidden !important
+
+
+// Text meant only for screen readers. */
+.screen-reader-text
+    clip rect(1px, 1px, 1px, 1px)
+    position absolute !important
+    height 1px
+    width 1px
+    overflow hidden
+
+
+// Makes an element visually hidden, but accessible
+// --------------------------------------------------------------------------
+
+.sr-only
+    sr-only()
+
+
+// Animations
+// --------------------------------------------------------------------------
+
+.fade
+    opacity 0
+    transition opacity .15s linear
+
+    &.in
+        opacity 1
+
+.collapse
+    display none
+    visibility hidden
+
+    &.in
+        display block
+        visibility visible
+
+    tr&.in
+        display table-row
+
+    tbody&.in
+        display table-row-group
+
+.collapsing
+    position relative
+    height 0
+    overflow hidden
+    transition-property height, visibility
+    transition-duration .35s
+    transition-timing-function ease
+
+
+// Embeds responsive
+// --------------------------------------------------------------------------
+
+.embed-responsive
+    position relative
+    display block
+    height 0
+    padding 0
+    overflow hidden
+
+    .embed-responsive-item,
+    iframe,
+    embed,
+    object,
+    video
+        position absolute
+        top 0
+        left 0
+        bottom 0
+        height 100%
+        width 100%
+        border 0
+
+// 16:9 aspect ratio
+.embed-responsive-16by9
+    padding-bottom 56.25%
+
+// 4:3 aspect ratio
+.embed-responsive-4by3
+    padding-bottom 75%

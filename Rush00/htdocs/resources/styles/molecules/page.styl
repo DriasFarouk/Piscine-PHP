@@ -1,0 +1,102 @@
+.ceremony-summary
+    min-height 100vh
+
+.ceremony-left,
+.ceremony-illustration
+    @media (min-width $screen-sm-min)
+        column('1/2')
+
+.ceremony-infos
+    padding 10px 20px
+
+    @media (min-width $screen-sm-min)
+        padding 50px 100px 0
+
+.ceremony-label
+    font-family $font-family-ibm-plex-serif
+    text-transform uppercase
+    font-size 1.7rem
+
+.ceremony-title
+    font-family $font-family-raleway
+    font-weight 800
+    font-size 4.7rem
+    color $color-gray
+    margin 10px 0 30px
+
+    @media (min-width $screen-sm-min)
+        font-size 6.7rem
+        margin 80px 0 100px
+
+.ceremony-details
+    clearfix()
+    color $color-gray
+    font-size 1.7rem
+    font-weight 300
+
+.ceremony-details__place,
+.ceremony-details__time
+    @media (min-width $screen-sm-min)
+        column('1/2')
+        position relative
+
+.ceremony-details__time
+    @media (min-width $screen-sm-min)
+        padding 0 0 0 30px
+
+.ceremony-details__place-label,
+.ceremony-details__time-label
+    font-family $font-family-ibm-plex-serif
+    text-transform uppercase
+    font-size 1.7rem
+
+    @media (min-width $screen-sm-min)
+        position absolute
+        transform rotate(-90deg)
+        transform-origin 0
+
+.ceremony-details__place-label
+    @media (min-width $screen-sm-min)
+        top 50px
+        left -30px
+
+.ceremony-details__time-label
+    @media (min-width $screen-sm-min)
+        top 70px
+        left 0
+
+.ceremony-details__place-name,
+.ceremony-details__time-date
+    font-weight 500
+
+.ceremony-details__place-address
+    margin 15px 0 0
+    font-size 1.6rem
+    max-width 70%
+
+.ceremony-intro
+    font-weight 300
+    color $color-gray
+    font-size 1.5rem
+    line-height 3rem
+    margin 40px 0
+
+    @media (min-width $screen-sm-min)
+        margin 60px 0
+        font-size 1.7rem
+        line-height 3.5rem
+
+.ceremony-illustration
+    padding 10px
+    background $color-gray
+
+    @media (min-width $screen-sm-min)
+        padding 20px
+
+.ceremony-illustration__img
+    background url('images/nativelle.jpg') center center no-repeat
+    background-size cover
+    height 300px
+
+    @media (min-width $screen-sm-min)
+        height calc(100vh - 40px)

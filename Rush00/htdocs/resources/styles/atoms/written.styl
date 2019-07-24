@@ -1,0 +1,109 @@
+//
+// Written
+// --------------------------------------------------------------------------
+
+.written
+    color lighten($text-color, 12%)
+
+    h1, h2, h3, h4, h5, h6
+        margin 3rem 0 1.5rem
+        font-family $font-family-ibm-plex-sans
+        font-weight 600
+        color $color-dark
+
+    h1
+        font-size 3rem
+    h2
+        font-size 2.5rem
+    h3
+        font-size 2.2rem
+    h4
+        font-size 2rem
+    h5
+        font-size 1.8rem
+    h6
+        font-size 1.6rem
+
+    p
+        margin 0 0 1.5rem
+        letter-spacing 0.4
+
+    ul
+        list-unstyled()
+        margin 1rem 0 1.5rem
+        padding-left 25px
+        line-height 1.4
+
+        li
+            position relative
+            margin 0 0 5px
+
+            &::before
+                content ''
+                position absolute
+                top 8px
+                left -24px
+                width 10px
+                height 10px
+                background-color $color-primary
+                border-radius 50%
+
+            ul
+                margin .5rem 0 1rem
+
+                li
+                    &::before
+                        width 6px
+                        height 6px
+                        background-color transparent
+                        border 2px solid $color-primary
+
+    ol
+        list-unstyled()
+        margin 1rem 0 1.5rem
+        padding-left 25px
+        line-height 1.4
+        counter-reset item
+
+        li
+            position relative
+
+            &::before
+                content counter(item) "."
+                counter-increment item
+                position absolute
+                top 0
+                left -24px
+                color $color-primary
+
+    blockquote
+        position relative
+        margin 2rem 2rem
+        padding 10px 10px 0 20px
+        overflow hidden
+        font-style italic
+        border-left 7px solid $color-gray-light
+
+        p,
+        cite
+            margin 0 0 1rem
+
+        cite
+            display block
+            font-style normal
+            color $color-primary
+
+    @media (min-width $screen-sm-min)
+        h1
+            font-size 3rem
+        h2
+            font-size 2.5rem
+        h3
+            font-size 2.2rem
+
+        blockquote
+
+            &::before
+                top 20px
+                left 20px
+                font-size 40px

@@ -1,0 +1,185 @@
+.navbar
+  position relative
+  min-height $navbar-height // Ensure a navbar always shows (e.g., without a .navbar-brand in collapsed mode)
+  margin-bottom $navbar-margin-bottom
+  border 1px solid transparent
+
+  // Prevent floats from breaking the navbar
+  clearfix()
+
+  @media (min-width $grid-float-breakpoint)
+    border-radius $navbar-border-radius
+
+// Navbar heading
+//
+// Groups `.navbar-brand` and `.navbar-toggle` into a single component for easy
+// styling of responsive aspects.
+
+.navbar-header
+  clearfix()
+
+  @media (min-width $grid-float-breakpoint)
+    float left
+
+//
+// When a container is present, change the behavior of the header and collapse.
+
+.container,
+.container-fluid
+  > .navbar-header,
+  > .navbar-collapse
+    margin-right -$navbar-padding-horizontal
+    margin-left -$navbar-padding-horizontal
+
+    @media (min-width $grid-float-breakpoint)
+      margin-right 0
+      margin-left 0
+
+// Navbar collapse (body)
+//
+// Group your navbar content into this for easy collapsing and expanding across
+// various device sizes. By default, this content is collapsed when <768px, but
+// will expand past that for a horizontal display.
+//
+// To start (on mobile devices) the navbar links, forms, and buttons are stacked
+// vertically and include a `max-height` to overflow in case you have too much
+// content for the user's viewport.
+
+.navbar-collapse
+  overflow-x visible
+  padding-right $navbar-padding-horizontal
+  padding-left $navbar-padding-horizontal
+  clearfix()
+  -webkit-overflow-scrolling touch
+  padding-top 20px
+
+  &.in
+    overflow-y auto
+
+  @media (min-width $grid-float-breakpoint)
+    width auto
+    border-top 0
+    box-shadow none
+
+    &.collapse
+      display block !important
+      height auto !important
+      padding-bottom 0 // Override default setting
+      overflow visible !important
+
+    &.in
+      overflow-y visible
+
+    // Undo the collapse side padding for navbars with containers to ensure
+    // alignment of right-aligned contents.
+    .navbar-fixed-top &,
+    .navbar-static-top &,
+    .navbar-fixed-bottom &
+      padding-left 0
+      padding-right 0
+
+// Brand/project name
+
+.navbar-name
+    float left
+    height $navbar-height
+    display inline-block
+    vertical-align middle
+    font-size 2.4rem
+    font-family $font-family-montserrat
+    font-weight 400
+    letter-spacing 0.4
+    color #fff
+    transition font-weight .15s ease-in-out
+    
+    @media (min-width $screen-sm-min)
+        font-size 2.7rem
+    
+    @media (min-width $screen-md-min)
+        font-size 3.4rem
+
+    &:hover,
+    &:focus
+        text-decoration none
+
+    @media (min-width $grid-float-breakpoint)
+        .navbar > .container &,
+        .navbar > .container-fluid &
+            margin-left (-($navbar-padding-horizontal))
+
+// Navbar toggle
+//
+// Custom button for toggling the `.navbar-collapse`, powered by the collapse
+// JavaScript plugin.
+
+.navbar-toggle
+    position relative
+    float right
+    margin-right $navbar-padding-horizontal
+    padding 9px 10px
+    navbar-vertical-align(34px)
+    background-color transparent
+    background-image none // Reset unusual Firefox-on-Android default style see https://github.com/necolas/normalize.css/issues/214
+    border 1px solid transparent
+    border-radius $border-radius-base
+    color #fff
+    
+    &:hover,
+    &:focus,
+    &:active,
+    &.active
+        text-decoration none
+
+  // We remove the `outline` here, but later compensate by attaching `:hover`
+  // styles to `:focus`.
+  &:focus
+    outline 0
+
+  // Bars
+  .icon-bar
+    display block
+    width 22px
+    height 2px
+    border-radius 1px
+  .icon-bar + .icon-bar
+    margin-top 4px
+
+  @media (min-width $grid-float-breakpoint)
+    display none
+
+
+// Navbar nav links
+//
+// Builds on top of the `.nav` components with its own modifier class to make
+// the nav the full height of the horizontal nav (above 768px).
+
+.navbar-nav
+    margin ($navbar-padding-vertical / 2) (-($navbar-padding-horizontal))
+
+    > li > a
+        padding-top 10px
+        padding-bottom 10px
+        line-height $line-height-computed
+
+    a
+        color #fff
+
+        &:hover,
+        &:focus,
+        &:active,
+        &.active
+            text-decoration none
+
+  // Uncollapse the nav
+  @media (min-width $grid-float-breakpoint)
+    float left
+    margin 0
+
+    > li
+      float left
+      > a
+        padding-top $navbar-padding-vertical
+        padding-bottom $navbar-padding-vertical
+
+
+

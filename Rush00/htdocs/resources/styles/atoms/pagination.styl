@@ -1,0 +1,218 @@
+//
+// Pagination
+// --------------------------------------------------------------------------
+
+
+// Variables
+// --------------------------------------------------------------------------
+
+$pagination-color ?=            $color-gray-dark
+$pagination-bg ?=               initial
+
+$pagination-hover-color ?=      $color-gray
+$pagination-hover-bg ?=         initial
+
+$pagination-active-color ?=     $color-secondary
+$pagination-active-bg ?=        initial
+
+
+// Mixins
+// --------------------------------------------------------------------------
+
+pagination-size($padding-vertical, $padding-horizontal, $font-size, $line-height)
+    > li
+        > a,
+        > span
+            padding $padding-vertical $padding-horizontal
+            font-size $font-size
+            line-height $line-height
+
+
+// Wrapper
+// --------------------------------------------------------------------------
+
+.pagination-wrapper
+    text-align center
+
+
+// Base
+// --------------------------------------------------------------------------
+
+.nav-links
+    display inline-block
+    margin 20px 0 0
+    padding-left 0
+
+    > a,
+    > span
+        padding $padding-small-vertical $padding-small-horizontal
+        font-size $font-size-base
+        font-family $font-family-montserrat
+        line-height $line-height-base
+        text-decoration none
+        color $pagination-color
+        background-color $pagination-bg
+        transition background-color .15s ease-in-out
+        vertical-align baseline
+
+    > a
+        &:hover,
+        &:focus
+            color $pagination-hover-color
+
+    > .current,
+    > .current > span
+        font-size 2.5rem
+        color $pagination-active-color
+        background-color $pagination-active-bg
+        border-bottom 4px solid $pagination-active-color
+
+    > a.previous,
+    > a.next
+        color $pagination-color
+        background-color $pagination-bg
+
+        &:hover,
+        &:focus
+            span
+                &::after
+                    border-right-color $pagination-hover-bg
+                    border-left-color $pagination-hover-bg
+
+    > .previous
+        span
+            position relative
+            padding-left 16px
+
+            &::before,
+            &::after
+                content ''
+                position absolute
+                top 50%
+                display block
+                width 0
+                height 0
+                border-color transparent
+                border-style solid
+                transition border-color .15s ease-in-out
+
+            &::before
+                left 0
+                margin-top -6px
+                border-width 6px
+                border-left-width 0
+                border-right-color $pagination-active-color
+
+            &::after
+                left 1px
+                margin-top (-6px + 1px)
+                border-width (6px - 1px)
+                border-left-width 0
+                border-right-color $pagination-active-bg
+
+    > .next
+        span
+            position relative
+            padding-right 16px
+
+            &::before,
+            &::after
+                content ''
+                position absolute
+                top 50%
+                display block
+                width 0
+                height 0
+                border-color transparent
+                border-style solid
+                transition border-color .15s ease-in-out
+
+            &::before
+                right 0
+                margin-top -6px
+                border-width 6px
+                border-right-width 0
+                border-left-color $pagination-active-color
+
+            &::after
+                right 1px
+                margin-top (-6px + 1px)
+                border-width (6px - 1px)
+                border-right-width 0
+                border-left-color $pagination-active-bg
+
+    @media (min-width $screen-sm-min)
+        margin 20px 0
+
+        > a,
+        > span
+            padding $padding-base-vertical $padding-base-horizontal
+            font-size 2.9rem
+            line-height $line-height-base
+
+        > .current
+            font-size 4rem
+            vertical-align baseline
+
+// Sizing
+// --------------------------------------------------------------------------
+
+// Large
+.pagination--lg
+    @media (min-width $screen-sm-min)
+        pagination-size($padding-large-vertical, $padding-large-horizontal, $font-size-large, $line-height-large)
+
+// Small
+.pagination--sm
+    @media (min-width $screen-sm-min)
+        pagination-size($padding-small-vertical, $padding-small-horizontal, $font-size-small, $line-height-small)
+
+
+// Pager pagination
+// --------------------------------------------------------------------------
+
+.pagination-pager
+    clearfix()
+    padding-left 0
+    margin 20px 0
+    list-style none
+    text-align center
+
+    li
+        display inline
+
+        > a
+            display inline-block
+            padding $padding-small-vertical $padding-small-horizontal
+            font-size $font-size-small
+            line-height $line-height-small
+            color $pagination-color
+            background-color $color-primary
+            transition background-color .15s ease-in-out
+
+            &:hover,
+            &:focus
+                text-decoration none
+                background-color $pagination-hover-bg
+
+    .previous
+        @extend .nav-links > .previous
+
+        > a
+            float left
+            @extend .nav-links > a.previous
+
+    .next
+        @extend .nav-links > .next
+
+        > a
+            float right
+            @extend .nav-links > a.next
+
+    @media (min-width $screen-sm-min)
+        li
+            > a
+                padding $padding-base-vertical $padding-base-horizontal
+                font-size $font-size-base
+                line-height $line-height-base
+
